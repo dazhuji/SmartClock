@@ -1,6 +1,6 @@
 package com.example.smartclock.entities;
 
-public class ClockItem {
+public class AlarmClockItem {
     private int hour;
     private int minute;
     private boolean enable;
@@ -10,8 +10,8 @@ public class ClockItem {
     private String song;
     private String description;
 
-    public ClockItem(int hour, int minute, boolean enable, boolean autoRepeat,
-                     boolean shakeWhileRinging, String[] repeatDay, String song, String description) {
+    public AlarmClockItem(int hour, int minute, boolean enable, boolean autoRepeat,
+                          boolean shakeWhileRinging, String[] repeatDay, String song, String description) {
         this.hour = hour;
         this.minute = minute;
         this.enable = enable;
