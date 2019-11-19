@@ -1,35 +1,32 @@
-package com.example.smartclock.util;
+package com.example.smartclock.utils;
 
 import android.content.Context;
 
-import com.example.smartclock.entities.ClockItem;
+import com.example.smartclock.entities.AlarmClockItem;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClocksUtil {
+public class AlarmClocksUtil {
 
-    public static List<ClockItem> getClocks(Context context)
+    public static List<AlarmClockItem> getClocks(Context context)
     {
-        List<ClockItem> list = new ArrayList<ClockItem>();
+        List<AlarmClockItem> list = new ArrayList<AlarmClockItem>();
         try{
             String line;
             StringBuilder sb = new StringBuilder();
-            InputStream inputStream =  context.getAssets().open("Clocks.json");
+            InputStream inputStream =  context.getAssets().open("AlarmClocks.json");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while((line = bufferedReader.readLine())!=null){sb.append(line); }
             JSONArray jsonArray = new JSONArray(sb.toString());
             for(int i=0;i<jsonArray.length();i++)
             {
-                ClockItem clockItem;
+                AlarmClockItem clockItem;
                 JSONObject object = new JSONObject(jsonArray.getString(i));
                 int hour = object.getInt("hour");
                 int minute = object.getInt("minute");
@@ -43,7 +40,7 @@ public class ClocksUtil {
                 for(int j=0;j<days.length();j++){
                     repeatDays[j] = days.getString(j);
                 }
-                clockItem = new ClockItem(hour, minute, enable, autoRepeat,
+                clockItem = new AlarmClockItem(hour, minute, enable, autoRepeat,
                         shakeWhileRinging, repeatDays, song, description);
                 list.add(clockItem);
 
@@ -55,7 +52,7 @@ public class ClocksUtil {
         return list;
     }
 
-    public static void saveClocks(List<ClockItem> lists)
+    public static void saveClocks(List<AlarmClockItem> lists)
     {
         //TODO 完成保存配置方法的编写
     }

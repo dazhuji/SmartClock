@@ -1,4 +1,4 @@
-package com.example.smartclock.fragments;
+package com.example.smartclock;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.example.smartclock.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingupFragment extends Fragment {
+public class SettingUpActivity extends Fragment {
 
 
-    public SettingupFragment() {
+    public SettingUpActivity() {
         // Required empty public constructor
     }
 

@@ -2,14 +2,14 @@ package com.example.smartclock.entities;
 
 import java.util.Date;
 
-public class RecordItem {
+public class NewsRecordItem {
     private Date date;
     private int hour;
     private int minute;
     private int percent;
     private int days;
 
-    public RecordItem(Date date, int hour, int minute, int percent, int days) {
+    public NewsRecordItem(Date date, int hour, int minute, int percent, int days) {
         this.date = date;
         this.hour = hour;
         this.minute = minute;
