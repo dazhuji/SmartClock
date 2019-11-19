@@ -11,11 +11,13 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.smartclock.R;
 import com.example.smartclock.adapters.AlarmClockListAdapter;
 import com.example.smartclock.entities.AlarmClockItem;
+import com.example.smartclock.utils.AlarmClocksUtil;
 import com.example.smartclock.viewmodels.AlarmClocksShowListViewModel;
 
 import java.util.List;
@@ -51,6 +53,18 @@ public class AlarmClocksShowListFragment extends Fragment {
                 list.setAdapter(adapter);
             }
         };
+
+        List<AlarmClockItem> list = AlarmClocksUtil.getClocks(getContext());
+        AlarmClockListAdapter adapter = new AlarmClockListAdapter(list);
+        viewModel.getAlarmClockList().setValue(list);
+
+        ((ListView)view.findViewById(R.id.AlarmClockList)).setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+        });
 
         return view;
     }
