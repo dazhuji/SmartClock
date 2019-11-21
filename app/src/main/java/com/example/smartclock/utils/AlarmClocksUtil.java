@@ -2,7 +2,7 @@ package com.example.smartclock.utils;
 
 import android.content.Context;
 
-import com.example.smartclock.entities.AlarmClockItem;
+import com.example.smartclock.pojo.AlarmClockItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,22 +20,22 @@ public class AlarmClocksUtil {
         try{
             String line;
             StringBuilder sb = new StringBuilder();
-            InputStream inputStream =  context.getAssets().open("AlarmClocks.json");
+            InputStream inputStream =  context.getResources().getAssets().open("AlarmClocks.json");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while((line = bufferedReader.readLine())!=null){sb.append(line); }
             JSONArray jsonArray = new JSONArray(sb.toString());
             for(int i=0;i<jsonArray.length();i++)
             {
                 AlarmClockItem clockItem;
-                JSONObject object = new JSONObject(jsonArray.getString(i));
-                int hour = object.getInt("hour");
-                int minute = object.getInt("minute");
-                boolean enable = object.getBoolean("enable");
-                boolean autoRepeat = object.getBoolean("autoRepeat");
-                boolean shakeWhileRinging = object.getBoolean("shakeWhileRinging");
-                String song = object.getString("song");
-                String description = object.getString("description");
-                JSONArray days = new JSONArray(object.getString("repeatDays"));
+                JSONObject jo = jsonArray.getJSONObject(i);
+                int hour = jo.getInt("hour");
+                int minute = jo.getInt("minute");
+                boolean enable = jo.getBoolean("enable");
+                boolean autoRepeat = jo.getBoolean("autoRepeat");
+                boolean shakeWhileRinging = jo.getBoolean("shakeWhileRinging");
+                String song = jo.getString("song");
+                String description = jo.getString("description");
+                JSONArray days = jo.getJSONArray("repeatDay");
                 String[] repeatDays = new String[days.length()];
                 for(int j=0;j<days.length();j++){
                     repeatDays[j] = days.getString(j);
@@ -47,6 +47,7 @@ public class AlarmClocksUtil {
             }
         }catch (Exception e)
         {
+            e.printStackTrace();
             return null;
         }
         return list;

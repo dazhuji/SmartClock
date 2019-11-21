@@ -2,31 +2,38 @@ package com.example.smartclock;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 
-import com.example.smartclock.R;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SettingUpActivity extends Fragment {
+import com.example.smartclock.viewmodels.AlarmClocksShowListViewModel;
 
 
-    public SettingUpActivity() {
-        // Required empty public constructor
-    }
+public class SettingUpActivity extends AppCompatActivity {
 
+    private AlarmClocksShowListViewModel viewModel;
+    private Button ok,cancel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settingup, container, false);
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settingup);
 
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+    }
 }

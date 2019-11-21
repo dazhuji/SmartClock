@@ -13,11 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartclock.R;
 import com.example.smartclock.adapters.AlarmClockListAdapter;
-import com.example.smartclock.entities.AlarmClockItem;
-import com.example.smartclock.utils.AlarmClocksUtil;
+import com.example.smartclock.pojo.AlarmClockItem;
 import com.example.smartclock.viewmodels.AlarmClocksShowListViewModel;
 
 import java.util.List;
@@ -27,8 +30,8 @@ import java.util.List;
  */
 public class AlarmClocksShowListFragment extends Fragment {
 
-    private AlarmClocksShowListViewModel viewModel;
     private View view;
+    private List<AlarmClockItem> list;
 
     public AlarmClocksShowListFragment() {
         // Required empty public constructor
@@ -41,30 +44,31 @@ public class AlarmClocksShowListFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_alarm_clocks_show_list, container, false);
-        viewModel = ViewModelProviders.of(this).get(AlarmClocksShowListViewModel.class);
+        final AlarmClocksShowListViewModel viewModel =
+                ViewModelProviders.of(getActivity()).get(AlarmClocksShowListViewModel.class);
 
         //Create an observer that updates the UI when the observed data source has been changed
-        final Observer<List<AlarmClockItem>> nameObserver = new Observer<List<AlarmClockItem>>() {
+        final Observer<List<AlarmClockItem>> listObserver = new Observer<List<AlarmClockItem>>() {
             @Override
             public void onChanged(@Nullable final List<AlarmClockItem> newList) {
                 // Update the UI
+                list = newList;
                 AlarmClockListAdapter adapter = new AlarmClockListAdapter(newList);
                 ListView list = (ListView)view.findViewById(R.id.AlarmClockList);
                 list.setAdapter(adapter);
+                Toast.makeText(getContext(), "UI更新成功", Toast.LENGTH_SHORT).show();
             }
         };
-
-        List<AlarmClockItem> list = AlarmClocksUtil.getClocks(getContext());
-        AlarmClockListAdapter adapter = new AlarmClockListAdapter(list);
-        viewModel.getAlarmClockList().setValue(list);
 
         ((ListView)view.findViewById(R.id.AlarmClockList)).setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
         });
+
+        viewModel.getAlarmClockList().observe(this, listObserver);
 
         return view;
     }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartclock.R;
-import com.example.smartclock.entities.AlarmClockItem;
+import com.example.smartclock.pojo.AlarmClockItem;
 
 import java.util.List;
 
@@ -59,7 +59,6 @@ public class AlarmClockListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //TODO 完成AlarmClockListAdapter的getView方法的编写
         View itemView;
         ViewHolder holder;
         if(convertView==null) {

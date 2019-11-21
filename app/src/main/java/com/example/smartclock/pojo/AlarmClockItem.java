@@ -1,4 +1,6 @@
-package com.example.smartclock.entities;
+package com.example.smartclock.pojo;
+
+import java.util.Arrays;
 
 public class AlarmClockItem {
     private int hour;
@@ -84,5 +86,19 @@ public class AlarmClockItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "AlarmClockItem{" +
+                "hour=" + hour +
+                ", minute=" + minute +
+                ", enable=" + enable +
+                ", autoRepeat=" + autoRepeat +
+                ", shakeWhileRinging=" + shakeWhileRinging +
+                ", repeatDay=" + Arrays.toString(repeatDay) +
+                ", song='" + song + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
