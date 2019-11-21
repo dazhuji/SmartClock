@@ -3,6 +3,7 @@ package com.example.smartclock;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(AlarmClocksShowListViewModel.class);
         list = AlarmClocksUtil.getClocks(this);
-
+        ((Button)findViewById(R.id.btn_add)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SettingUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
