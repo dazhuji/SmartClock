@@ -70,7 +70,7 @@ public class AlarmClocksShowListFragment extends Fragment implements AlarmClockL
 
                         alterDiaglog.setView(R.layout.time_change_dialog);//加载进去
                         AlertDialog dialog = alterDiaglog.create();
-                       
+
                         dialog.show();
 
                     }

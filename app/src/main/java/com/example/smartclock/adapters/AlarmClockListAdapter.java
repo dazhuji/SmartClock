@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -34,9 +35,22 @@ public class AlarmClockListAdapter extends BaseAdapter {
 
 
     private List<AlarmClockItem> list;
+    private SwitchClickedListener listener;
+
+    public interface SwitchClickedListener{
+        void itemClicked(boolean b,int position);
+    }
+
+    public AlarmClockListAdapter() {
+    }
 
     public AlarmClockListAdapter(List<AlarmClockItem> list) {
         this.list = list;
+    }
+
+    public  void setData(List<AlarmClockItem> list)
+    {
+        this.list  =list;
     }
 
     @Override
@@ -58,7 +72,7 @@ public class AlarmClockListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View itemView;
         ViewHolder holder;
         if(convertView==null) {
@@ -81,8 +95,21 @@ public class AlarmClockListAdapter extends BaseAdapter {
         }else{
             holder.statue.setText("闹钟关闭");
         }
-        holder.switchStatue.setEnabled(alarmClockItem.isEnable());
+        holder.switchStatue.setTag(position);
+        holder.switchStatue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                listener.itemClicked(b,position);
+            }
+        });
+        holder.switchStatue.setChecked(alarmClockItem.isEnable());
         return itemView;
 
     }
+
+    public void setSwitchClickedListener(SwitchClickedListener listener){
+        this.listener = listener;
+    }
+
+
 }

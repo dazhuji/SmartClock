@@ -1,6 +1,7 @@
 package com.example.smartclock;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -30,13 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(AlarmClocksShowListViewModel.class);
         list = AlarmClocksUtil.getClocks(this);
+
         ((Button)findViewById(R.id.btn_add)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,SettingUpActivity.class);
                 startActivityForResult(intent, 0x0);
+
+
             }
         });
+
+
+
     }
 
     @Override
@@ -44,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         //设置liveData的值，此时UI得到更新通知
         viewModel.getAlarmClockList().setValue(list);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AlarmClocksUtil.saveClocks(list,this);
     }
 
     @Override
