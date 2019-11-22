@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartclock.pojo.AlarmClockItem;
@@ -53,6 +54,13 @@ public class SettingUpActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(!isSaved){
+
+        }
     }
 }

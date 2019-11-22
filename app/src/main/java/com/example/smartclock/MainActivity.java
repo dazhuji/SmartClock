@@ -50,18 +50,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==0&&resultCode==0){
-            Bundle bundle = data.getExtras();
-            if(bundle!=null){
-                AlarmClockItem item = new AlarmClockItem();
-                item.setHour(bundle.getInt("hour"));
-                item.setMinute(bundle.getInt("minute"));
-                item.setAutoRepeat(bundle.getBoolean("autoRepeat"));
-                item.setShakeWhileRinging(bundle.getBoolean("shakeWhileRinging"));
-                item.setDescription(bundle.getString("description"));
-                item.setEnable(true);
-                list.add(item);
-                viewModel.getAlarmClockList().setValue(list);
-                AlarmClocksUtil.saveClocks(list, this);
+            if(data!=null){
+                Bundle bundle = data.getExtras();
+                if(bundle!=null){
+                    AlarmClockItem item = new AlarmClockItem();
+                    item.setHour(bundle.getInt("hour"));
+                    item.setMinute(bundle.getInt("minute"));
+                    item.setAutoRepeat(bundle.getBoolean("autoRepeat"));
+                    item.setShakeWhileRinging(bundle.getBoolean("shakeWhileRinging"));
+                    item.setDescription(bundle.getString("description"));
+                    item.setEnable(true);
+                    list.add(item);
+                    viewModel.getAlarmClockList().setValue(list);
+                    AlarmClocksUtil.saveClocks(list, this);
+                }
             }
         }
     }

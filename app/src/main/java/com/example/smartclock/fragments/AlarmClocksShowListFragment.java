@@ -59,7 +59,14 @@ public class AlarmClocksShowListFragment extends Fragment {
             }
         };
 
-
+        ((ListView)view.findViewById(R.id.AlarmClockList)).setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), "列表项被点击了", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
 
         viewModel.getAlarmClockList().observe(this, listObserver);
 
