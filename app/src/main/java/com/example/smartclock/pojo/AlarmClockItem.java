@@ -12,6 +12,10 @@ public class AlarmClockItem {
     private String song;
     private String description;
 
+    public AlarmClockItem() {
+
+    }
+
     public AlarmClockItem(int hour, int minute, boolean enable, boolean autoRepeat,
                           boolean shakeWhileRinging, String[] repeatDay, String song, String description) {
         this.hour = hour;
@@ -90,7 +94,7 @@ public class AlarmClockItem {
 
     @Override
     public String toString() {
-        return "AlarmClockItem{" +
+        return "{" +
                 "hour=" + hour +
                 ", minute=" + minute +
                 ", enable=" + enable +

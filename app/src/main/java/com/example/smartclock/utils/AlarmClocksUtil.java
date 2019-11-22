@@ -5,10 +5,17 @@ import android.content.Context;
 import com.example.smartclock.pojo.AlarmClockItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSON;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +27,8 @@ public class AlarmClocksUtil {
         try{
             String line;
             StringBuilder sb = new StringBuilder();
-            InputStream inputStream =  context.getResources().getAssets().open("AlarmClocks.json");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            File file = new File(context.getFilesDir(), "AlarmClocks.json");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             while((line = bufferedReader.readLine())!=null){sb.append(line); }
             JSONArray jsonArray = new JSONArray(sb.toString());
             for(int i=0;i<jsonArray.length();i++)
@@ -33,13 +40,14 @@ public class AlarmClocksUtil {
                 boolean enable = jo.getBoolean("enable");
                 boolean autoRepeat = jo.getBoolean("autoRepeat");
                 boolean shakeWhileRinging = jo.getBoolean("shakeWhileRinging");
-                String song = jo.getString("song");
+                //String song = jo.getString("song");
+                String song = "";
                 String description = jo.getString("description");
-                JSONArray days = jo.getJSONArray("repeatDay");
-                String[] repeatDays = new String[days.length()];
-                for(int j=0;j<days.length();j++){
-                    repeatDays[j] = days.getString(j);
-                }
+                //JSONArray days = jo.getJSONArray("repeatDay");
+                String[] repeatDays = new String[3];
+                //for(int j=0;j<days.length();j++){
+                //    repeatDays[j] = days.getString(j);
+                //}
                 clockItem = new AlarmClockItem(hour, minute, enable, autoRepeat,
                         shakeWhileRinging, repeatDays, song, description);
                 list.add(clockItem);
@@ -48,13 +56,26 @@ public class AlarmClocksUtil {
         }catch (Exception e)
         {
             e.printStackTrace();
-            return null;
         }
         return list;
     }
 
-    public static void saveClocks(List<AlarmClockItem> lists)
+    public static void saveClocks(List<AlarmClockItem> lists,Context context)
     {
         //TODO 完成保存配置方法的编写
+        try {
+            File file = new File(context.getFilesDir(), "AlarmClocks.json");
+            StringBuilder sb = new StringBuilder();
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            String result = JSON.toJSONString(lists);
+            System.out.println(result);
+            Writer writer = new FileWriter(file);
+            writer.write(result);
+            writer.close();
+        }catch (Exception e){
+
+        }
     }
 }

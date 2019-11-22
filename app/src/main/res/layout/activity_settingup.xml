@@ -17,7 +17,7 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="取消" />
@@ -32,7 +32,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="保存" />
@@ -41,6 +41,7 @@
     </TableLayout>
 
     <TimePicker
+        android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -132,13 +133,6 @@
                 android:text="响铃时振动" />
 
             <Switch
-                android:id="@+id/switch9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="响铃后删除此闹钟" />
-
-            <Switch
                 android:id="@+id/switch7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +168,7 @@
                         android:background="?android:attr/listDivider" />
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
