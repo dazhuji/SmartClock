@@ -68,9 +68,45 @@ public class AlarmClocksShowListFragment extends Fragment implements AlarmClockL
                 adapter.notifyDataSetChanged();
             }
         };
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int position=i;
+                AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(getContext());
+                alterDiaglog.setView(R.layout.alarmcloc_delete_dialog);//加载进去
+                final AlertDialog dialog = alterDiaglog.create();
+                View layout = inflater.inflate(R.layout.alarmcloc_delete_dialog,null);
+                dialog.setView(layout);
+                Button cancle=(Button)layout.findViewById(R.id.cancle);
+                Button remove=(Button)layout.findViewById(R.id.remove);
+                cancle.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+
+                remove.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+
+                        list.remove(position);
+
+                        dialog.cancel();
+                        adapter.setData(list);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                });
+                dialog.show();
+
+                return true;
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(final AdapterView<?> adapterView, View view, int i, long l) {
+                        final int position=i;
                         AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(getContext());
                         alterDiaglog.setView(R.layout.time_change_dialog);//加载进去
                         final AlertDialog dialog = alterDiaglog.create();
@@ -86,7 +122,7 @@ public class AlarmClocksShowListFragment extends Fragment implements AlarmClockL
                                 dialog.cancel();
                             }
                         });
-                        final int position=i;
+
                         change.setOnClickListener(new View.OnClickListener(){
                             @Override
                             public void onClick(View view) {
@@ -104,7 +140,6 @@ public class AlarmClocksShowListFragment extends Fragment implements AlarmClockL
                         dialog.show();
                     }
                 });
-
         viewModel.getAlarmClockList().observe(this, listObserver);
         return view;
     }
