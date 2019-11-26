@@ -1,6 +1,7 @@
 package com.example.smartclock.fragments;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Switch;
@@ -24,6 +27,8 @@ import com.example.smartclock.R;
 import com.example.smartclock.adapters.AlarmClockListAdapter;
 import com.example.smartclock.pojo.AlarmClockItem;
 import com.example.smartclock.viewmodels.AlarmClocksShowListViewModel;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -63,19 +68,78 @@ public class AlarmClocksShowListFragment extends Fragment implements AlarmClockL
                 adapter.notifyDataSetChanged();
             }
         };
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int position=i;
+                AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(getContext());
+                alterDiaglog.setView(R.layout.alarmcloc_delete_dialog);//加载进去
+                final AlertDialog dialog = alterDiaglog.create();
+                View layout = inflater.inflate(R.layout.alarmcloc_delete_dialog,null);
+                dialog.setView(layout);
+                Button cancle=(Button)layout.findViewById(R.id.cancle);
+                Button remove=(Button)layout.findViewById(R.id.remove);
+                cancle.setOnClickListener(new View.OnClickListener(){
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(getContext());
-
-                        alterDiaglog.setView(R.layout.time_change_dialog);//加载进去
-                        AlertDialog dialog = alterDiaglog.create();
-
-                        dialog.show();
-
+                    public void onClick(View view) {
+                        dialog.cancel();
                     }
                 });
 
+                remove.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+
+                        list.remove(position);
+
+                        dialog.cancel();
+                        adapter.setData(list);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                });
+                dialog.show();
+
+                return true;
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(final AdapterView<?> adapterView, View view, int i, long l) {
+                        final int position=i;
+                        AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(getContext());
+                        alterDiaglog.setView(R.layout.time_change_dialog);//加载进去
+                        final AlertDialog dialog = alterDiaglog.create();
+                        View layout = inflater.inflate(R.layout.time_change_dialog,null);
+                        dialog.setView(layout);
+                        final EditText hour=(EditText)layout.findViewById(R.id.hour);
+                        final EditText minute=(EditText )layout.findViewById(R.id.minute);
+                        Button cancle=(Button)layout.findViewById(R.id.cancle);
+                        Button change=(Button)layout.findViewById(R.id.change);
+                        cancle.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View view) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        change.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View view) {
+                                int h=Integer.valueOf(hour.getText().toString());
+                                int m=Integer.valueOf(minute.getText().toString());
+                                AlarmClockItem alarmClockItem=list.get(position);
+                                alarmClockItem.setHour(h);
+                                alarmClockItem.setMinute(m);
+                                dialog.cancel();
+                                adapter.setData(list);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                        });
+                        dialog.show();
+                    }
+                });
         viewModel.getAlarmClockList().observe(this, listObserver);
         return view;
     }
