@@ -36,14 +36,8 @@ class ViewHolder{
 public class AlarmClockListAdapter extends BaseAdapter {
 
     private List<AlarmClockItem> list;
-    private AlarmManager manager;
-    private Map<String, PendingIntent> intentMap;
 
-
-    public AlarmClockListAdapter(AlarmManager manager,Map<String, PendingIntent> intentMap) {
-        this.manager = manager;
-        this.intentMap = intentMap;
-    }
+    public AlarmClockListAdapter() { }
 
     public AlarmClockListAdapter(List<AlarmClockItem> list) {
         this.list = list;

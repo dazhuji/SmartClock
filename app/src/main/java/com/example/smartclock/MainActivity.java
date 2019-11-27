@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     //新建PendingIntent
                     AlarmManager Mgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
                     Intent intent = new Intent(this, ClockActivity.class);
-                    PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                    PendingIntent alarmIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
                     //将响铃时间设为新创建的闹钟时间
                     Calendar calendar = Calendar.getInstance();

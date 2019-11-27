@@ -56,6 +56,7 @@ public class AlarmClocksShowListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         alarmManager = (AlarmManager) getContext().getSystemService(ALARM_SERVICE);
+        adapter = new AlarmClockListAdapter();
         view = inflater.inflate(R.layout.fragment_alarm_clocks_show_list, container, false);
         listView = (ListView)view.findViewById(R.id.AlarmClockList);
         listView.setAdapter(adapter);
@@ -68,7 +69,7 @@ public class AlarmClocksShowListFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final List<AlarmClockItem> newList) {
                 // Update the UI
-                //list = newList;
+                list = newList;
                 adapter.setData(list);
                 adapter.notifyDataSetChanged();
             }
@@ -176,6 +177,8 @@ public class AlarmClocksShowListFragment extends Fragment {
                         dialog.show();
                     }
                 });
+
+
         viewModel.getAlarmClockList().observe(this, listObserver);
         return view;
     }
