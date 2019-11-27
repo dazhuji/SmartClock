@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //保存闹钟
         AlarmClocksUtil.saveClocks(list,this);
     }
 
@@ -75,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
                     item.setEnable(true);
                     list.add(item);
                     viewModel.getAlarmClockList().setValue(list);
-                    AlarmClocksUtil.saveClocks(list, this);
                 }
             }
         }
     }
+
+
 }

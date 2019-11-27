@@ -1,6 +1,7 @@
 package com.example.smartclock.adapters;
 
 
+import android.app.AlarmManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,8 @@ public class AlarmClockListAdapter extends BaseAdapter {
 
 
     private List<AlarmClockItem> list;
-    private SwitchClickedListener listener;
+    private AlarmManager manager;
 
-    public interface SwitchClickedListener{
-        void itemClicked(boolean b,int position);
-    }
 
     public AlarmClockListAdapter() {
     }
@@ -99,7 +97,14 @@ public class AlarmClockListAdapter extends BaseAdapter {
         holder.switchStatue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listener.itemClicked(b,position);
+                list.get(position).setEnable(b);
+                if(b)
+                {
+
+                }else{
+
+                }
+                AlarmClockListAdapter.this.notifyDataSetChanged();
             }
         });
         holder.switchStatue.setChecked(alarmClockItem.isEnable());
@@ -107,9 +112,6 @@ public class AlarmClockListAdapter extends BaseAdapter {
 
     }
 
-    public void setSwitchClickedListener(SwitchClickedListener listener){
-        this.listener = listener;
-    }
 
 
 }
