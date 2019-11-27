@@ -3,6 +3,7 @@ package com.example.smartclock.pojo;
 import java.util.Arrays;
 
 public class AlarmClockItem {
+    private String id;
     private int hour;
     private int minute;
     private boolean enable;
@@ -16,8 +17,9 @@ public class AlarmClockItem {
 
     }
 
-    public AlarmClockItem(int hour, int minute, boolean enable, boolean autoRepeat,
+    public AlarmClockItem(String id, int hour, int minute, boolean enable, boolean autoRepeat,
                           boolean shakeWhileRinging, String[] repeatDay, String song, String description) {
+        this.id = id;
         this.hour = hour;
         this.minute = minute;
         this.enable = enable;
@@ -26,6 +28,14 @@ public class AlarmClockItem {
         this.repeatDay = repeatDay;
         this.song = song;
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getHour() {

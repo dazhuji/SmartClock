@@ -21,7 +21,6 @@ public class SettingUpActivity extends AppCompatActivity {
 
     private AlarmClocksShowListViewModel viewModel;
     private Button ok,cancel;
-    private boolean isSaved;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,13 +31,12 @@ public class SettingUpActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isSaved = true;
+                Intent intent = getIntent();
+                Bundle bundle = new Bundle();
                 TimePicker timePicker = (TimePicker)findViewById(R.id.time);
                 Switch switch1 = (Switch)findViewById(R.id.switch7);
                 Switch switch2 = (Switch)findViewById(R.id.switch8);
                 TextView description = (TextView)findViewById(R.id.description);
-                Intent intent = getIntent();
-                Bundle bundle = new Bundle();
                 bundle.putInt("hour",timePicker.getHour());
                 bundle.putInt("minute",timePicker.getMinute());
                 bundle.putBoolean("autoRepeat", switch1.isEnabled());
@@ -49,18 +47,5 @@ public class SettingUpActivity extends AppCompatActivity {
                 SettingUpActivity.this.finish();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(!isSaved){
-
-        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.smartclock.adapters;
 
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.smartclock.R;
 import com.example.smartclock.pojo.AlarmClockItem;
 
 import java.util.List;
+import java.util.Map;
 
 
 class ViewHolder{
@@ -33,13 +35,14 @@ class ViewHolder{
 
 public class AlarmClockListAdapter extends BaseAdapter {
 
-
-
     private List<AlarmClockItem> list;
     private AlarmManager manager;
+    private Map<String, PendingIntent> intentMap;
 
 
-    public AlarmClockListAdapter() {
+    public AlarmClockListAdapter(AlarmManager manager,Map<String, PendingIntent> intentMap) {
+        this.manager = manager;
+        this.intentMap = intentMap;
     }
 
     public AlarmClockListAdapter(List<AlarmClockItem> list) {
@@ -68,6 +71,7 @@ public class AlarmClockListAdapter extends BaseAdapter {
         if(list!=null) return i;
         else return 0;
     }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
