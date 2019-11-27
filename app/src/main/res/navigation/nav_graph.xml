@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/alarmClocksShowListFragment">
+    <fragment
+        android:id="@+id/alarmClocksShowListFragment"
+        android:name="com.example.smartclock.fragments.AlarmClocksShowListFragment"
+        android:label="fragment_alarm_clocks_show_list"
+        tools:layout="@layout/fragment_alarm_clocks_show_list" />
+</navigation>
