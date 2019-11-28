@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme" >
 
         <activity android:name=".ClockActivity" />
-        <activity android:name=".LifeNewsActivity" />
+        <activity android:name=".RecordActivity" >
+        </activity>
         <activity android:name=".SettingUpActivity" />
         <activity android:name=".MainActivity" >
             <intent-filter>
