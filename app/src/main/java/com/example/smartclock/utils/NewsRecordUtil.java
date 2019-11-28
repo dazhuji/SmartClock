@@ -2,7 +2,7 @@ package com.example.smartclock.utils;
 
 import android.content.Context;
 
-import com.example.smartclock.entities.NewsRecordItem;
+import com.example.smartclock.pojo.NewsRecordItem;
 
 import java.util.List;
 

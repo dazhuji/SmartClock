@@ -1,4 +1,4 @@
-package com.example.smartclock.entities;
+package com.example.smartclock.pojo;
 
 import java.util.Date;
 
