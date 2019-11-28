@@ -1,34 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.smartclock.viewmodels.MainActivityViewModel" />
-    </data>
-
     <!-- UI layout's root element -->
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
 
-        <fragment
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
 
-    </LinearLayout>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-</layout>
+                                <Button
+                                    android:id="@+id/btn_alarmClock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="闹钟" />
+
+                                <Button
+                                    android:id="@+id/btn_clock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="时钟" />
+
+                                <Button
+                                    android:id="@+id/btn_timer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="秒表" />
+
+                                <Button
+                                    android:id="@+id/btn_countDown"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="计时" />
+                        </TableRow>
+
+                </TableLayout>
+
+                <fragment
+                    android:id="@+id/nav_host_fragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_graph" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom">
+
+                <Button
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="添加闹钟" />
+        </RelativeLayout>
+
+</FrameLayout>
+
+

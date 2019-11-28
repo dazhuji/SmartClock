@@ -3,16 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/placeholder1">
-    <fragment android:id="@+id/placeholder1" >
-        <action
-            android:id="@+id/action_placeholder1_to_placeholder2"
-            app:destination="@id/placeholder2" />
-    </fragment>
-    <fragment android:id="@+id/placeholder2" >
-        <action
-            android:id="@+id/action_placeholder2_to_placeholder3"
-            app:destination="@id/placeholder3" />
-    </fragment>
-    <fragment android:id="@+id/placeholder3" />
+    app:startDestination="@id/alarmClocksShowListFragment">
+    <fragment
+        android:id="@+id/alarmClocksShowListFragment"
+        android:name="com.example.smartclock.fragments.AlarmClocksShowListFragment"
+        android:label="fragment_alarm_clocks_show_list"
+        tools:layout="@layout/fragment_alarm_clocks_show_list" />
 </navigation>
