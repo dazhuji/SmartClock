@@ -1,9 +1,5 @@
 package com.example.smartclock;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,6 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smartclock.pojo.AlarmClockItem;
 import com.example.smartclock.utils.AlarmClocksUtil;
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     //新建PendingIntent
                     AlarmManager Mgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
                     Intent intent = new Intent(this, ClockActivity.class);
+
                     PendingIntent alarmIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
                     //将响铃时间设为新创建的闹钟时间
